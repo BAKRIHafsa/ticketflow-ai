@@ -1,6 +1,5 @@
 <div class="auth-page">
 
-  <!-- Left side : branding -->
   <section class="auth-brand">
 
     <div class="brand-content">
@@ -8,95 +7,50 @@
       <img src="images/help-desk.png" alt="TicketFlow logo" class="brand-logo"/>
       <h2>Customer support, organized.</h2>
 
-      <p>
-        Manage customer requests, communicate efficiently,
-        and keep every support ticket under control.
-      </p>
+      <p>Manage customer requests, communicate efficiently,and keep every support ticket under control.</p>
     </div>
 
   </section>
 
 
-  <!-- Right side : login form -->
   <section class="auth-form-section">
 
     <div class="auth-card">
 
       <h1>Welcome back</h1>
 
-      <p class="subtitle">
-        Sign in to your TicketFlow account
-      </p>
+      <p class="subtitle">Sign in to your TicketFlow account</p>
 
-      @if (errorMessage) {
-      <p class="server-error">
-         {{ errorMessage }}
-      </p>
-      }
+      @if (errorMessage) {<p class="server-error">{{ errorMessage }}</p>}
 
-      <form
-        [formGroup]="loginForm"
-        (ngSubmit)="onSubmit()"
-      >
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-        <!-- Email -->
         <div class="form-group">
 
           <label for="email">Email</label>
 
-          <input
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-            formControlName="email"
-          />
+          <input id="email" type="email" placeholder="Enter your email" formControlName="email"/>
 
           @if (loginForm.controls.email.invalid && loginForm.controls.email.touched) {
-            <p class="error">
-              Email is required and must be valid.
-            </p>
+            <p class="error">Email is required and must be valid.</p>
           }
 
         </div>
 
-
-        <!-- Password -->
         <div class="form-group">
 
           <label for="password">Password</label>
 
-          <input
-            id="password"
-            type="password"
-            placeholder="Enter your password"
-            formControlName="password"
-          />
+          <input id="password" type="password" placeholder="Enter your password" formControlName="password"/>
 
           @if (loginForm.controls.password.invalid && loginForm.controls.password.touched) {
-            <p class="error">
-              Password is required.
-            </p>
+            <p class="error">Password is required.</p>
           }
-
         </div>
 
-
-        <!-- Submit -->
-        <button
-          type="submit"
-          [disabled]="loginForm.invalid"
-        >
-          Login
-        </button>
+        <button type="submit" [disabled]="loginForm.invalid">Login</button>
 
       </form>
-
-
-      <p class="register-link">
-        Don't have an account?
-        <a routerLink="/register">Create an account</a>
-      </p>
-
     </div>
 
   </section>

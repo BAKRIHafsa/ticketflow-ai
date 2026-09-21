@@ -4,7 +4,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   const publicUrls = [
     '/api/auth/login', 
-    '/api/auth/register'
   ];
   const isPublicUrl = publicUrls.some(url => req.url.endsWith(url));
   if (isPublicUrl){

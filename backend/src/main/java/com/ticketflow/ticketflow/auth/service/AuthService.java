@@ -4,7 +4,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ticketflow.ticketflow.auth.dto.LoginRequest;
-import com.ticketflow.ticketflow.auth.dto.RegisterRequest;
 import com.ticketflow.ticketflow.user.entity.User;
 import com.ticketflow.ticketflow.user.service.UserService;
 
@@ -21,7 +20,7 @@ public class AuthService {
         this.jwtService=jwtService;
     }
 
-    public User register(RegisterRequest request){
+    /* public User register(RegisterRequest request){
         
         if (userService.findByEmail(request.getEmail()).isPresent()){
             throw new RuntimeException("Emaol already registred");
@@ -30,9 +29,9 @@ public class AuthService {
         user.setEmail(request.getEmail());
         String hashedPassword=passwordEncoder.encode(request.getPassword());
         user.setPassword(hashedPassword);
-
+        user.setRole(AppRole.CUSTOMER);
         return userService.save(user);
-    }
+    } */
 
     public String login(LoginRequest request){
         
@@ -40,6 +39,6 @@ public class AuthService {
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())){
             throw new RuntimeException("Invalid email or password");
         }
-        return jwtService.generateToken(user.getEmail());
+        return jwtService.generateToken(user);
     }
 }

@@ -4,10 +4,7 @@
   background: #f5f7fb;
 }
 
-/* =========================
-   Left side - Branding
-   ========================= */
-
+//Left side - Branding
 .auth-brand {
   width: 45%;
   background: #0d47d9;
@@ -39,10 +36,7 @@
 }
 
 
-/* =========================
-   Right side
-   ========================= */
-
+//Right side
 .auth-form-section {
   width: 55%;
   display: flex;
@@ -71,10 +65,7 @@
 }
 
 
-/* =========================
-   Form
-   ========================= */
-
+//Form
 .form-group {
   margin-bottom: 22px;
 }
@@ -107,10 +98,7 @@
 }
 
 
-/* =========================
-   Button
-   ========================= */
-
+//Button
 button {
   width: 100%;
   padding: 14px;
@@ -133,32 +121,7 @@ button:disabled {
   cursor: not-allowed;
 }
 
-
-/* =========================
-   Register link
-   ========================= */
-
-.register-link {
-  text-align: center;
-  margin-top: 25px;
-  color: #777;
-}
-
-.register-link a {
-  color: #0d47d9;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.register-link a:hover {
-  text-decoration: underline;
-}
-
-
-/* =========================
-   Responsive
-   ========================= */
-
+//Responsive config
 @media (max-width: 768px) {
 
   .auth-page {
