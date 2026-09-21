@@ -1,27 +1,20 @@
 services:
+
   postgres:
     image: postgres:16-alpine
     container_name: ticketflow-postgres
     restart: unless-stopped
 
     environment:
-      POSTGRES_USER: ${DB_USER:-ticketflow}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-ticketflow_dev_password}
-      POSTGRES_DB: ${DB_NAME:-ticketflow}
-
-    ports:
-      - '${DB_PORT:-5432}:5432'
-    
-    #networks:
-      #- app_network
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
 
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    image: ${DOCKERHUB_USERNAME}/ticketflow-backend:${IMAGE_TAG}
     container_name: ticketflow-backend
     restart: unless-stopped
 
@@ -31,22 +24,17 @@ services:
     environment:
       DB_HOST: postgres
       DB_PORT: 5432
-      DB_NAME: ${DB_NAME:-ticketflow}
-      DB_USER: ${DB_USER:-ticketflow}
-      DB_PASSWORD: ${DB_PASSWORD:-ticketflow_dev_password}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
       JWT_SECRET: ${JWT_SECRET}
       JWT_EXPIRATION: ${JWT_EXPIRATION}
+
     ports:
       - "${BACKEND_PORT:-8080}:8080"
 
-    #networks:
-      #- app_network
-
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-
+    image: ${DOCKERHUB_USERNAME}/ticketflow-frontend:${IMAGE_TAG}
     container_name: ticketflow-frontend
     restart: unless-stopped
 
@@ -56,13 +44,6 @@ services:
     ports:
       - "${FRONTEND_PORT:-4200}:80"
 
-    #networks:
-      #- app_network
-
 
 volumes:
   postgres_data:
-
-# networks:
-#   ticketflow_network:
-#     driver: bridge
